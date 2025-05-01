@@ -1,89 +1,86 @@
-/* perfil.html */
+/* ========== ESTILOS COMUNES PARA TODAS LAS RESOLUCIONES ========== */
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ========== PERFIL.HTML ========== */
 .contenedor {
     display: flex;
-    justify-content: center;
     gap: 10px;
-    font-family: Arial, sans-serif;
+    justify-content: center;
     margin: 20px;
 }
+
 .foto {
     width: auto;
     height: 350px;
-    border-radius: 40px 5px 5px 5px; /* Curva en borde superior izquierdo */
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.1); /* Sombra suave */
+    border-radius: 40px 5px 5px 5px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    object-fit: cover;
 }
+
 .perfil {
-    border: 1px solid #ddd; /* Borde del contenedor */
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Sombra exterior */
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
     padding: 20px;
     border-radius: 5px;
+    background: white;
 }
+
 .nombre {
     color: #2E86C1;
     font-size: 28px;
     margin-bottom: 15px;
 }
+
 .descripcion {
     font-family: 'Times New Roman', serif;
     font-style: italic;
     margin-bottom: 20px;
+    line-height: 1.5;
 }
+
 .lista-datos strong {
     font-weight: bold;
 }
-/* Estilos para enlaces de correo */
+
 .perfil a:link {
     color: orange;
     text-decoration: none;
 }
+
 .perfil a:visited {
     color: red;
 }
+
 .perfil a:hover {
     text-decoration: underline;
 }
 
-/* 320px — 480px: Dispositivos móviles Perfil 
-
-@media screen and (min-width: 320px){
-    .contenedor {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        font-family: Arial, sans-serif;
-        margin: 15px;
-    }
-
-
-}*/
-
-/* Pagina index.html */
-
-* {
-    margin: 0;
-    /*padding: 0;*/
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-}
-
+/* ========== INDEX.HTML ========== */
 header, footer {
     background-color: #2E86C1;
     padding: 20px;
-    /*border-bottom: 2px solid #2E86C1;*/
 }
 
 footer {
-    /*border-top: 2px solid #2E86C1;*/
     border-bottom: none;
     text-align: center;
     margin-top: 20px;
 }
 
-nav>ul {
+nav ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
     list-style: none;
+    padding: 0;
     color: white;
 }
 
@@ -94,12 +91,13 @@ nav>ul {
 
 .titulo span {
     font-size: 15px;
-    /* color: #666; */
+    opacity: 0.8;
 }
 
 .busqueda {
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 .busqueda input {
@@ -112,56 +110,153 @@ nav>ul {
 .busqueda button {
     padding: 8px 15px;
     background-color: #f5f5f5;
-    color: black;
+    color: #2E86C1;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.busqueda button:hover {
+    background-color: #2E86C1;
+    color: white;
 }
 
 section {
     padding: 20px;
-    margin: 1% 10%;
 }
 
 .lista-estudiantes {
     list-style: none;
+    padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
 }
 
 .estudiante {
-    /*display: flex;
-    gap: 10px;*/
-    box-shadow: 5px 5px 0px rgba(0, 0, 0, 25%);
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.25);
     text-align: center;
-    padding: 10px;
+    padding: 15px;
     border: 1px solid #eee;
     border-radius: 4px;
     transition: all 0.3s ease;
-    cursor: pointer;
-    background-color: white;
+    background: white;
 }
 
 .estudiante:hover {
-    background-color: #99c5dd !important;
-    transform: scale(1.05) rotate(5deg);;
+    transform: scale(1.05);
+    box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.3);
 }
 
 .estudiante img {
     border-radius: 50%;
     object-fit: cover;
-    height: 250px;
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    aspect-ratio: 1/1;
 }
 
 .estudiante p {
     color: #2E86C1;
-}
-
-#freddy {
-    width: 245px;
+    margin: 10px 0 0;
+    font-weight: bold;
 }
 
 .saludo-usuario {
+    font-size: 1.1em;
     font-weight: bold;
+}
+
+/* ========== MEDIA QUERIES ========== */
+/* Mobile (320px - 480px) - Estilos base ya aplicados */
+
+/* Tablets (481px - 768px) */
+@media screen and (min-width: 481px) {
+    .contenedor {
+        flex-direction: row;
+        margin: 25px;
+    }
+    
+    .foto {
+        width: 45%;
+        height: 300px;
+    }
+    
+    .lista-estudiantes {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .busqueda input {
+        width: 250px;
+    }
+}
+
+/* Laptops (769px - 1024px) */
+@media screen and (min-width: 769px) {
+    .contenedor {
+        max-width: 900px;
+        margin: 30px auto;
+    }
+    
+    .foto {
+        height: 400px;
+    }
+    
+    .lista-estudiantes {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .nombre {
+        font-size: 32px;
+    }
+    
+    section {
+        padding: 30px 15%;
+    }
+}
+
+/* Desktop (1025px - 1200px) */
+@media screen and (min-width: 1025px) {
+    .contenedor {
+        max-width: 1200px;
+        gap: 40px;
+    }
+    
+    .foto {
+        height: 450px;
+        border-radius: 60px 5px 5px 5px;
+    }
+    
+    .lista-estudiantes {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .titulo {
+        font-size: 28px;
+    }
+    
+    .busqueda input {
+        width: 300px;
+    }
+    
+    .descripcion {
+        font-size: 1.1em;
+    }
+}
+
+/* ========== ESTILOS ESPECÍFICOS ========== */
+#freddy {
+    border: 3px solid #2E86C1;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #ffffffcc;
+}
+
+/* Efectos de transición generales */
+.contenedor, .estudiante, .busqueda button {
+    transition: all 0.3s ease-in-out;
 }
