@@ -1,6 +1,7 @@
 /* perfil.html */
 .contenedor {
     display: flex;
+    justify-content: center;
     gap: 10px;
     font-family: Arial, sans-serif;
     margin: 20px;
@@ -41,6 +42,20 @@
 .perfil a:hover {
     text-decoration: underline;
 }
+
+/* 320px — 480px: Dispositivos móviles Perfil 
+
+@media screen and (min-width: 320px){
+    .contenedor {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-family: Arial, sans-serif;
+        margin: 15px;
+    }
+
+
+}*/
 
 /* Pagina index.html */
 
