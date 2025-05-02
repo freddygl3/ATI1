@@ -1,6 +1,7 @@
 /* ========== ESTILOS COMUNES PARA TODAS LAS RESOLUCIONES ========== */
 * {
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
     font-family: 'Arial', sans-serif;
 }
@@ -12,30 +13,28 @@ a {
 /* ========== PERFIL.HTML ========== */
 .contenedor {
     display: flex;
+    flex-direction: column;
     gap: 10px;
-    justify-content: center;
-    margin: 20px;
+    font-family: Arial, sans-serif;
+    margin: 15px;
 }
 
 .foto {
-    width: auto;
-    height: 350px;
-    border-radius: 40px 5px 5px 5px;
+    width: 100%;
+    height: auto;
+    border-radius: 20px 5px 5px 5px;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-    object-fit: cover;
 }
 
 .perfil {
     border: 1px solid #ddd;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    padding: 20px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    padding: 15px;
     border-radius: 5px;
-    background: white;
 }
 
 .nombre {
     color: #2E86C1;
-    font-size: 28px;
     margin-bottom: 15px;
 }
 
@@ -43,7 +42,6 @@ a {
     font-family: 'Times New Roman', serif;
     font-style: italic;
     margin-bottom: 20px;
-    line-height: 1.5;
 }
 
 .lista-datos strong {
@@ -75,12 +73,13 @@ footer {
     margin-top: 20px;
 }
 
-nav ul {
+.menu-nav > ul {
     display: flex;
+    flex-direction: column;
+    gap: 5px;
     justify-content: space-between;
     align-items: center;
     list-style: none;
-    padding: 0;
     color: white;
 }
 
@@ -97,7 +96,6 @@ nav ul {
 .busqueda {
     display: flex;
     gap: 10px;
-    align-items: center;
 }
 
 .busqueda input {
@@ -110,11 +108,10 @@ nav ul {
 .busqueda button {
     padding: 8px 15px;
     background-color: #f5f5f5;
-    color: #2E86C1;
+    color: black;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: all 0.3s ease;
 }
 
 .busqueda button:hover {
@@ -144,17 +141,14 @@ section {
 }
 
 .estudiante:hover {
-    transform: scale(1.05);
-    box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.3);
+    background-color: #99c5dd !important;
+    transform: scale(1.05) rotate(5deg);
 }
 
 .estudiante img {
     border-radius: 50%;
     object-fit: cover;
-    width: 100%;
-    max-width: 250px;
-    height: auto;
-    aspect-ratio: 1/1;
+    height: 200px;
 }
 
 .estudiante p {
@@ -173,61 +167,108 @@ section {
 
 /* Tablets (481px - 768px) */
 @media screen and (min-width: 481px) {
+    /* ========== PERFIL.HTML ========== */
     .contenedor {
         flex-direction: row;
-        margin: 25px;
+        margin: 20px;
     }
     
     .foto {
-        width: 45%;
+        object-fit: cover;
         height: 300px;
+        border-radius: 40px 5px 5px 5px;
     }
+    
+    .perfil {
+        padding: 20px;
+    }
+    
+    .nombre {
+        font-size: 24px;
+    }
+
+    /* ========== INDEX.HTML ========== */
     
     .lista-estudiantes {
         grid-template-columns: repeat(2, 1fr);
     }
     
-    .busqueda input {
-        width: 250px;
-    }
 }
 
 /* Laptops (769px - 1024px) */
 @media screen and (min-width: 769px) {
+    /* ========== PERFIL.HTML ========== */
     .contenedor {
         max-width: 900px;
-        margin: 30px auto;
+    }
+    
+    .foto {
+        height: 350px;
+        width: auto;
+    }
+    
+    .nombre {
+        font-size: 28px;
+    }
+    
+    .perfil {
+        padding: 25px;
+    }
+    
+    .descripcion {
+        font-size: 1.1em;
+    }
+
+    /* ========== INDEX.HTML ========== */
+    .menu-nav > ul {
+        display: flex;
+        flex-direction: row;
+
+    }
+    
+    .lista-estudiantes {
+        grid-template-columns: repeat(3, minmax(150px, 1fr));
+    }
+    
+}
+
+/* Desktop (1025px - 1200px) */
+@media screen and (min-width: 1025px) {
+    /* ========== PERFIL.HTML ========== */
+    .contenedor {
+        max-width: 1100px;
+        gap: 30px;
     }
     
     .foto {
         height: 400px;
+        border-radius: 50px 5px 5px 5px;
     }
     
-    .lista-estudiantes {
-        grid-template-columns: repeat(3, 1fr);
+    .perfil {
+        padding: 30px;
     }
     
     .nombre {
         font-size: 32px;
     }
     
-    section {
-        padding: 30px 15%;
+    .descripcion {
+        font-size: 1.15em;
+        line-height: 1.6;
     }
-}
+    
+    .perfil:hover {
+        transform: translateY(-5px);
+        transition: transform 0.3s ease;
+    }
 
-/* Desktop (1025px - 1200px) */
-@media screen and (min-width: 1025px) {
-    .contenedor {
-        max-width: 1200px;
-        gap: 40px;
+    .foto:hover {
+        transform: translateY(-5px);
+        transition: transform 0.3s ease;
     }
-    
-    .foto {
-        height: 450px;
-        border-radius: 60px 5px 5px 5px;
-    }
-    
+
+    /* ========== INDEX.HTML ========== */
     .lista-estudiantes {
         grid-template-columns: repeat(4, 1fr);
     }
@@ -235,13 +276,9 @@ section {
     .titulo {
         font-size: 28px;
     }
-    
-    .busqueda input {
-        width: 300px;
-    }
-    
-    .descripcion {
-        font-size: 1.1em;
+
+    section {
+        padding: 30px 15%;
     }
 }
 

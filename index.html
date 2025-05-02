@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <nav>
+        <nav class="menu-nav">
             <ul>
                 <li class="titulo">ATI<span>[UCV]</span> 2025-1</li>
                 <li class="saludo-usuario">Hola, Freddy Lopez</li>
@@ -25,7 +25,11 @@
     <section>
         <ul class="lista-estudiantes">
             <li class="estudiante">
-                <img src="images/21534219.png" id="freddy" alt="">
+                <picture>
+                    <source media="(max-width: 769px)" srcset="images/CEDULAPequena.jpg" alt="CEDULAPequena">
+                    <source media="(min-width: 769px)" srcset="images/CEDULAGrande.jpg" alt="CEDULAGrande">
+                    <img src="images/CEDULAGrande.jpg" id="freddy" alt="">
+                </picture>
                 <p>Freddy Lopez</p>
             </li>
             <li class="estudiante">

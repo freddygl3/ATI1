@@ -9,8 +9,12 @@
 </head>
 <body>
     <div class="contenedor">
-        <img src="images/21534219.png" alt="Foto de Freddy Lopez" class="foto">
-        
+        <picture>
+            <source media="(max-width: 769px)" srcset="images/CEDULAPequena.jpg">
+            <source media="(min-width: 769px)" srcset="images/CEDULAGrande.jpg">
+            <img src="images/CEDULAGrande.jpg" alt="Foto de Freddy Lopez" class="foto">
+        </picture>
+
         <div class="perfil">
             <h1 class="nombre">Freddy Lopez</h1>
             
