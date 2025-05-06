@@ -1,5 +1,10 @@
 const perfiles = [
     {
+        "ci": "21534219",
+        "imagen": "images/21534219.png",
+        "nombre": "Freddy Lopez"
+    },
+    {
         "ci": "19371273",
         "imagen": "19371273\/19371273.jpg",
         "nombre": "Raquel Escalante Salazar"
