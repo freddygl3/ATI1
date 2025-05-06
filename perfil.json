@@ -1,0 +1,14 @@
+const perfil = {
+	"nombre": "Freddy Lopez",
+    "descripcion": "Estudiante de computación.",
+	"color": "Azul y Gris",
+	"libro": "Ética para Amador",
+	"musica": "Salsa",
+	"video_juego": "Final Fantasy Tactics Advance",
+	"lenguajes": ["c++", "python"],
+	"email": "freddygllz@gmail.com",
+	"ci": "21534219",
+	"genero": "Masculino",
+	"fecha_nacimiento": "27/10/1992",
+	"imagen": "images/21534219.png"
+}
