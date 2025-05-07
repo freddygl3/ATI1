@@ -10,7 +10,9 @@ async function cargarConfiguracion() {
     } catch (error) {
         console.error('Error cargando configuración:', error);
     }
+
 }
 
 // Ejecutar al cargar la página
 window.addEventListener('DOMContentLoaded', cargarConfiguracion);
+
