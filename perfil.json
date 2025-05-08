@@ -1,4 +1,4 @@
-const perfil = {
+{
 	"nombre": "Freddy Lopez",
     "descripcion": "Estudiante de computación.",
 	"color": "Azul y Gris",
