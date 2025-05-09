@@ -1,11 +1,13 @@
-const configLink = document.getElementById('configES');
 const datosLink = document.getElementById('datosJson');
 
 // Función para cargar la configuración
 async function cargarConfiguracion() {
     try {
+        const lang = document.documentElement.lang;
+        const configLang = cargarLang(lang);
+
         const [config, data] = await Promise.all([
-            fetch(configLink.href).then(r => r.json()),
+            fetch(configLang).then(r => r.json()),
             fetch(datosLink.href).then(r => r.json())
         ]);
 
@@ -19,6 +21,19 @@ async function cargarConfiguracion() {
         console.error('Error cargando configuración:', error);
     }
 
+}
+
+function cargarLang(lang) {
+    let confLang = "";
+    if (lang === "es") {
+        confLang = "conf/configES.json";
+    } else if (lang === "en") {
+        confLang = "conf/configEN.json";
+    } else {
+        confLang = "conf/configES.json";
+    }
+
+    return confLang;
 }
 
 function cargarCfg(cfg){

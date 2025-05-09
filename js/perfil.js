@@ -1,16 +1,19 @@
-const configLink = document.getElementById('configES');
-const perfilLink = document.getElementById('perfilJS');
-
 // Función para cargar la configuración
 async function cargarConfiguracion() {
     try {
-        const [config, perfil] = await Promise.all([
-            fetch(configLink.href).then(r => r.json()),
-            fetch(perfilLink.href).then(r => r.json())
-        ]);
+        const lang = document.documentElement.lang;
+        const configLang = cargarLang(lang);
+        const urlParams = new URLSearchParams(window.location.search);
+        const perfilID = urlParams.get('perfil');
 
+        console.log(configLang);
+        const [config, perfil] = await Promise.all([
+            fetch(configLang).then(r => r.json()),
+            fetch(`${perfilID}/perfil.json`).then(r => r.json())
+        ]);
+        console.log(`${perfilID}/perfil.json`);
         console.log('Datos cargados:', { config, perfil });
-        cargarPerfil(config, perfil);
+        cargarPerfil(config, perfil, perfilID);
 
         // Usar la configuración en tu aplicación
     } catch (error) {
@@ -19,13 +22,44 @@ async function cargarConfiguracion() {
 
 }
 
-function cargarPerfil(cfg,data) {
-    const descrip = document.getElementsByClassName('descripcion')[0];
-    const nombr = document.getElementsByClassName('nombre')[0];
+function cargarLang(lang) {
+    let confLang = "";
+    if (lang === "es") {
+        confLang = "conf/configES.json";
+    } else if (lang === "en") {
+        confLang = "conf/configEN.json";
+    } else {
+        confLang = "conf/configES.json";
+    }
+
+    return confLang;
+}
+
+async function cargarPerfil(cfg, data, imgID) {
+    const descripcion = document.getElementsByClassName('descripcion')[0];
+    const nombre = document.getElementsByClassName('nombre')[0];
     const emailCfg = document.getElementById('emailCfg');
-    descrip.textContent = data.descripcion;
-    nombr.textContent = data.nombre;
+    const img = document.getElementsByClassName('foto')[0];
+
+    // Cargar datos básicos
+    descripcion.textContent = data.descripcion;
+    nombre.textContent = data.nombre;
     emailCfg.innerHTML = cfg.email + `<a href= "mailto:${data.email}"> ${data.email}</a>`;
+
+    // Cargar imagen (primero PNG, luego JPG)
+    try {
+        const response = await fetch(`/${imgID}/${imgID}.png`);
+        if (response.ok) {
+            img.src = `/${imgID}/${imgID}.png`;
+        } else {
+            const jpgResponse = await fetch(`/${imgID}/${imgID}.jpg`);
+            if (jpgResponse.ok) img.src = `/${imgID}/${imgID}.jpg`;
+        }
+    } catch (error) {
+        console.error('Error cargando imagen:', error);
+        img.src = 'placeholder.jpg'; // Imagen por defecto
+    }
+
     
     // Seleccionar todos los td de la tabla
     const cells1 = document.querySelectorAll('.tabla-perfil td:nth-child(1)');
