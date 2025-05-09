@@ -16,6 +16,7 @@ async function cargarConfiguracion() {
         // Usar la configuración en tu aplicación
         cargarCfg(config);
         cargarData(data);
+        queryEstudiante(data);
 
     } catch (error) {
         console.error('Error cargando configuración:', error);
@@ -25,20 +26,15 @@ async function cargarConfiguracion() {
 
 function cargarLang(lang) {
     let confLang = "";
-    if (lang === "es") {
-        confLang = "conf/configES.json";
-    } else if (lang === "en") {
-        confLang = "conf/configEN.json";
-    } else {
-        confLang = "conf/configES.json";
-    }
-
+    if (lang === "es") confLang = "conf/configES.json";
+    else if (lang === "en") confLang = "conf/configEN.json";
+    else confLang = "conf/configES.json";
     return confLang;
 }
 
-function cargarCfg(cfg){
+function cargarCfg(cfg) {
     const titulo = document.getElementsByClassName('titulo')[0];
-    titulo.innerHTML =  cfg.sitio[0] + `<span>${cfg.sitio[1]} </span>` + cfg.sitio[2];
+    titulo.innerHTML = cfg.sitio[0] + `<span>${cfg.sitio[1]} </span>` + cfg.sitio[2];
     document.getElementById('foooter').textContent = cfg.copyRight;
     document.getElementsByClassName('saludo-usuario')[0].textContent = cfg.saludo;
     document.getElementById('boton').textContent = cfg.buscar;
@@ -46,8 +42,9 @@ function cargarCfg(cfg){
 
 }
 
-function cargarData(data){
+function cargarData(data) {
     const lista_estudiantes = document.getElementsByClassName('lista-estudiantes')[0];
+    lista_estudiantes.innerHTML = ''; // Limpiar lista
 
     data.forEach(estudiante => {
         const li = document.createElement('li');
@@ -62,9 +59,9 @@ function cargarData(data){
 
         // Obtener la CI
         const perfilID = estudiante.ci;
-        li.setAttribute("data-id", perfilID);
+        li.setAttribute('data-id', perfilID);
 
-        li.addEventListener("click", function () {
+        li.addEventListener('click', function () {
             window.location.href = `perfil.html?perfil=${perfilID}`;
         });
 
@@ -74,6 +71,30 @@ function cargarData(data){
     });
 
 }
+
+function queryEstudiante(data) {
+    const estudiantes = data;
+    const entradaBusqueda = document.querySelector('input[name="q"]');
+    const listaEstudiantes = document.querySelector('.lista-estudiantes');
+
+    entradaBusqueda.addEventListener('input', (e) => {
+        const queryText = e.target.value.trim();
+        const query = queryText.toLowerCase();
+        const filtrados = estudiantes.filter(est =>
+            est.nombre.toLowerCase().includes(query)
+        );
+
+        cargarData(filtrados); // Actualiza la lista con resultados filtrados
+
+        // Mostrar mensaje si no hay resultados y la búsqueda no está vacía
+        if (filtrados.length === 0 && queryText !== '') {
+            const mensaje = document.createElement('li');
+            mensaje.textContent = `No hay alumnos que tengan en su nombre: ${queryText}`;
+            listaEstudiantes.appendChild(mensaje);
+        }
+    });
+}
+
 // Ejecutar al cargar la página
 window.addEventListener('DOMContentLoaded', cargarConfiguracion);
 
