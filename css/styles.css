@@ -163,6 +163,13 @@ section {
     font-weight: bold;
 }
 
+.noHay {
+    margin: 160px;
+    font-size: x-large;
+    color: #609ebf;
+    font-weight: bold;
+}
+
 /* ========== MEDIA QUERIES ========== */
 /* Mobile (320px - 480px) - Estilos base ya aplicados */
 

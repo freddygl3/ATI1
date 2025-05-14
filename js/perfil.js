@@ -1,7 +1,8 @@
 // Función para cargar la configuración
 async function cargarConfiguracion() {
     try {
-        const lang = document.documentElement.lang;
+        const params = new URLSearchParams(window.location.search);
+        const lang = params.get("lang") || document.documentElement.lang;
         const configLang = cargarLang(lang);
         const urlParams = new URLSearchParams(window.location.search);
         const perfilID = urlParams.get('perfil');
@@ -24,14 +25,9 @@ async function cargarConfiguracion() {
 
 function cargarLang(lang) {
     let confLang = "";
-    if (lang === "es") {
-        confLang = "conf/configES.json";
-    } else if (lang === "en") {
-        confLang = "conf/configEN.json";
-    } else {
-        confLang = "conf/configES.json";
-    }
-
+    if (lang.toLowerCase() === "es") confLang = "conf/configES.json";
+    else if (lang.toLowerCase() === "en") confLang = "conf/configEN.json";
+    else if (lang.toLowerCase() === "pt") confLang = "conf/configPT.json";
     return confLang;
 }
 

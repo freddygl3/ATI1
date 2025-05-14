@@ -3,7 +3,8 @@ const datosLink = document.getElementById('datosJson');
 // Función para cargar la configuración
 async function cargarConfiguracion() {
     try {
-        const lang = document.documentElement.lang;
+        const params = new URLSearchParams(window.location.search);
+        const lang = params.get("lang") || document.documentElement.lang;
         const configLang = cargarLang(lang);
 
         const [config, data] = await Promise.all([
@@ -15,7 +16,7 @@ async function cargarConfiguracion() {
 
         // Usar la configuración en tu aplicación
         cargarCfg(config);
-        cargarData(data);
+        cargarData(data, lang);
         queryEstudiante(data);
 
     } catch (error) {
@@ -26,9 +27,9 @@ async function cargarConfiguracion() {
 
 function cargarLang(lang) {
     let confLang = "";
-    if (lang === "es") confLang = "conf/configES.json";
-    else if (lang === "en") confLang = "conf/configEN.json";
-    else confLang = "conf/configES.json";
+    if (lang.toLowerCase() === "es") confLang = "conf/configES.json";
+    else if (lang.toLowerCase() === "en") confLang = "conf/configEN.json";
+    else if (lang.toLowerCase() === "pt") confLang = "conf/configPT.json";
     return confLang;
 }
 
@@ -42,7 +43,7 @@ function cargarCfg(cfg) {
 
 }
 
-function cargarData(data) {
+function cargarData(data, lang) {
     const lista_estudiantes = document.getElementsByClassName('lista-estudiantes')[0];
     lista_estudiantes.innerHTML = ''; // Limpiar lista
 
@@ -62,7 +63,7 @@ function cargarData(data) {
         li.setAttribute('data-id', perfilID);
 
         li.addEventListener('click', function () {
-            window.location.href = `perfil.html?perfil=${perfilID}`;
+            window.location.href = `perfil.html?perfil=${perfilID}&lang=${lang}`;
         });
 
         li.appendChild(img);
@@ -90,6 +91,7 @@ function queryEstudiante(data) {
         if (filtrados.length === 0 && queryText !== '') {
             const mensaje = document.createElement('li');
             mensaje.textContent = `No hay alumnos que tengan en su nombre: ${queryText}`;
+            mensaje.className = 'noHay';
             listaEstudiantes.appendChild(mensaje);
         }
     });
