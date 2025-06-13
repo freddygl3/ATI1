@@ -1,8 +1,8 @@
 FROM ubuntu:latest
 
-RUN apt-get update && \
-    apt-get install -y apache2 python3 python3-pip libapache2-mod-wsgi-py3 git && \
-    apt-get clean
+RUN apt update && \
+    apt install -y apache2 python3 python3-pip libapache2-mod-wsgi-py3 python3-beaker uwsgi uwsgi-plugins-all && \
+    apt clean
 
 # Configurar Apache
 RUN a2enmod wsgi
@@ -11,11 +11,9 @@ RUN a2ensite ATI.conf
 
 # Instalar dependencias Python
 WORKDIR /var/www/ATI
-COPY requirements.txt .
-RUN pip3 install -r requirements.txt
 
 # Copiar aplicación
-COPY ./ /usr/local/apache2/htdocs/
+COPY . .
 
 # Permisos
 RUN chown -R www-data:www-data /var/www/ATI && \
